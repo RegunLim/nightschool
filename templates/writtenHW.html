@@ -64,25 +64,39 @@
 
   function make_card(lessonNo, number, question, answer) {
     let tempHtml =
-      `<div class="problem" style="margin:40px 25px">
+      `<div class="problem" style="margin:40px 0px 40px; width: 800px">
         <label for="exampleInputEmail1">Q${number}. ${question}</label>
         <input  type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Write here">
       </div>`
     $(`#question${lessonNo}`).append(tempHtml)
   }
 
-  $(function(){
-    
-    $('.list-group a').click(function(e) {
-        e.preventDefault()
+  $(function () {
 
-        $that = $(this);
+    $('.list-group a').click(function (e) {
+      e.preventDefault()
 
-        $that.parent().find('a').removeClass('active');
-        $that.addClass('active');
-        console.log($that);
+      $that = $(this);
+
+      $that.parent().find('a').removeClass('active');
+      $that.addClass('active');
+
+      console.log($that[0].innerHTML);
+      let questionNo = 1;
+      if ($that[0].innerHTML) {
+        questionNo = $that[0].innerHTML[$that[0].innerHTML.length - 1];
+      }
+      activeQuestion(questionNo);
     });
-})
+  })
+
+  function activeQuestion(questionNo) {
+    $(".lesson-display").removeClass('active');
+    $(`#lesson${questionNo}`).addClass('active');
+  }
+
+
+
 
 </script>
 {% endblock %}
@@ -96,9 +110,9 @@
   <div class="col-4">
     <div class="list-group" id="list-tab" role="tablist">
 
-      <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#lesson1"
+      <a class="list-group-item list-group-item-action" id="list-settings-list1" data-toggle="list" href="#lesson1"
         role="tab" aria-controls="settings">Lesson 1</a>
-      <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#lesson2"
+      <a class="list-group-item list-group-item-action" id="list-settings-list2" data-toggle="list" href="#lesson2"
         role="tab" aria-controls="settings">Lesson 2</a>
       <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#lesson3"
         role="tab" aria-controls="settings">Lesson 3</a>
@@ -119,38 +133,38 @@
   </div>
   <div class="col-8">
     <div class="tab-content" id="nav-tabContent">
-      <div class="lesson-display tab-pane fade show active" id="lesson1" role="tabpanel" aria-labelledby="list-home-list">
+      <div class="lesson-display tab-pane fade show active" id="lesson1" role="tabpanel"
+        aria-labelledby="list-home-list">
         <div id="question1">
         </div>
         <button onclick="showanswer()" type="submit" class="btn btn-primary">Check The Answers</button>
       </div>
-     
     </div>
     <div class="tab-content" id="nav-tabContent">
-      <div class="tab-pane fade show inactive" id="lesson2" role="tabpanel" aria-labelledby="list-home-list">
+      <div class="lesson-display tab-pane fade show inactive" id="lesson2" role="tabpanel"
+        aria-labelledby="list-home-list">
         <div id="question2">
         </div>
         <button onclick="showanswer()" type="submit" class="btn btn-primary">Check The Answers</button>
       </div>
     </div>
     <div class="tab-content" id="nav-tabContent">
-      <div class="tab-pane fade show inactive" id="lesson3" role="tabpanel" aria-labelledby="list-home-list">
+      <div class="lesson-display tab-pane fade show inactive" id="lesson3" role="tabpanel"
+        aria-labelledby="list-home-list">
         <div id="question3">
         </div>
         <button onclick="showanswer()" type="submit" class="btn btn-primary">Check The Answers</button>
       </div>
     </div>
     <div class="tab-content" id="nav-tabContent">
-      <div class="tab-pane fade show inactive" id="lesson4" role="tabpanel" aria-labelledby="list-home-list">
+      <div class="lesson-display tab-pane fade show inactive" id="lesson4" role="tabpanel"
+        aria-labelledby="list-home-list">
         <div id="question4">
         </div>
         <button onclick="showanswer()" type="submit" class="btn btn-primary">Check The Answers</button>
       </div>
     </div>
-    
-
-</div>
-</div>
+  </div>
 </div>
 
 {% endblock %}
