@@ -1,5 +1,13 @@
 lesson,number,question,answer
-1,1,"이거, 내거야.",This
-1,2,"이거, 내 책들이야.",s
-1,3,"저거, 걔(남자)거야.",ddd
-1,4,"저거, 걔(남자)책이야",hhhh
+1,1,나,I
+1,2,너,you
+1,3,우리,We
+1,4,걔네,They
+2,1,안녕,Hi
+2,2,잘가,GB
+2,3,잘자,GN
+2,4,좋은 아침,GM
+3,1,고마워,Thanks
+3,2,천만에,Welcome
+3,3,괜찮아,Not a problem
+3,4,내일,TMRW

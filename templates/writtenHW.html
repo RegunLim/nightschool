@@ -13,7 +13,78 @@
     margin-top: 50px;
     width: 700px;
   }
+
+  .lesson-display {
+    margin-top: 100px;
+  }
 </style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+  // function showanswer() {
+  //   $.ajax({
+  //     type: "Get",
+  //     url: "/lesson/1",
+  //     data: {},
+  //     success: function (response) {
+  //       if (response['result'] == 'success') {
+  //         let lesson = response['lesson'];
+  //         for (let i = 0; i < lesson.length; i++) {
+  //           make_card(lesson[i]['number'], lesson[i]['question'], lesson[i]['answer']);
+  //         }
+  //       } else {
+  //         alert('질문 불러오기 실패')
+  //       }
+  //     }
+  //   })
+  // }
+
+  $(document).ready(function () {
+    getLessons();
+  })
+
+  function getLessons() {
+    $.ajax({
+      type: "Get",
+      url: "/lesson1",
+      data: {},
+      success: function (response) {
+        if (response['result'] == 'success') {
+          let lessons = response['lesson'];
+          for (let i = 0; i < lessons.length; i++) {
+            make_card(lessons[i]['lesson'], lessons[i]['number'], lessons[i]['question'], lessons[i]['answer']);
+          }
+        } else {
+          alert('질문 불러오기 실패')
+        }
+      }
+    })
+  }
+
+  function make_card(lessonNo, number, question, answer) {
+    let tempHtml =
+      `<div class="problem" style="margin:40px 25px">
+        <label for="exampleInputEmail1">Q${number}. ${question}</label>
+        <input  type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Write here">
+      </div>`
+    $(`#question${lessonNo}`).append(tempHtml)
+  }
+
+  $(function(){
+    
+    $('.list-group a').click(function(e) {
+        e.preventDefault()
+
+        $that = $(this);
+
+        $that.parent().find('a').removeClass('active');
+        $that.addClass('active');
+        console.log($that);
+    });
+})
+
+</script>
 {% endblock %}
 
 
@@ -24,55 +95,62 @@
 <div class="row">
   <div class="col-4">
     <div class="list-group" id="list-tab" role="tablist">
+
       <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#lesson1"
         role="tab" aria-controls="settings">Lesson 1</a>
-      <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-messages"
+      <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#lesson2"
         role="tab" aria-controls="settings">Lesson 2</a>
-      <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings"
+      <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#lesson3"
         role="tab" aria-controls="settings">Lesson 3</a>
-      <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings"
+      <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#lesson4"
         role="tab" aria-controls="settings">Lesson 4</a>
-      <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings"
+      <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#lesson5"
         role="tab" aria-controls="settings">Lesson 5</a>
-      <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings"
+      <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#lesson6"
         role="tab" aria-controls="settings">Lesson 6</a>
-      <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings"
+      <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#lesson7"
         role="tab" aria-controls="settings">Lesson 7</a>
-      <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings"
+      <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#lesson8"
         role="tab" aria-controls="settings">Lesson 8</a>
-      <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings"
+      <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#lesson9"
         role="tab" aria-controls="settings">Lesson 9</a>
-      <!-- <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">...</div> -->
+
     </div>
   </div>
   <div class="col-8">
     <div class="tab-content" id="nav-tabContent">
-      <div class="tab-pane fade show active" id="lesson1" role="tabpanel" aria-labelledby="list-home-list">
-        <form>
-          <div class="form-group">
-            <label for="example" style="font-size: 50px; font-weight: bold;">WRITTEN HOMEWORK</label>
-            <hr>
-            <label for="exampleInputEmail1">Q1. 너는 아침에 샤워해?</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-              placeholder="Write here">
-            <hr>
-            <label for="exampleInputEmail1">Q2. 너는 아침에 샤워 안 해?</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-              placeholder="Write here">
-            <hr>
-            <label for="exampleInputEmail1">Q3. 난 밤에 샤워해.</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-              placeholder="Write here">
-            <hr>
-          </div>
-          <button type="submit" class="btn btn-primary">Check The Answers</button>
-        </form>
+      <div class="lesson-display tab-pane fade show active" id="lesson1" role="tabpanel" aria-labelledby="list-home-list">
+        <div id="question1">
+        </div>
+        <button onclick="showanswer()" type="submit" class="btn btn-primary">Check The Answers</button>
       </div>
-      <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">...</div>
-      <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">11111</div>
-      <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">33333</div>
+     
     </div>
-  </div>
+    <div class="tab-content" id="nav-tabContent">
+      <div class="tab-pane fade show inactive" id="lesson2" role="tabpanel" aria-labelledby="list-home-list">
+        <div id="question2">
+        </div>
+        <button onclick="showanswer()" type="submit" class="btn btn-primary">Check The Answers</button>
+      </div>
+    </div>
+    <div class="tab-content" id="nav-tabContent">
+      <div class="tab-pane fade show inactive" id="lesson3" role="tabpanel" aria-labelledby="list-home-list">
+        <div id="question3">
+        </div>
+        <button onclick="showanswer()" type="submit" class="btn btn-primary">Check The Answers</button>
+      </div>
+    </div>
+    <div class="tab-content" id="nav-tabContent">
+      <div class="tab-pane fade show inactive" id="lesson4" role="tabpanel" aria-labelledby="list-home-list">
+        <div id="question4">
+        </div>
+        <button onclick="showanswer()" type="submit" class="btn btn-primary">Check The Answers</button>
+      </div>
+    </div>
+    
+
+</div>
+</div>
 </div>
 
 {% endblock %}

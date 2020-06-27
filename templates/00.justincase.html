@@ -5,10 +5,10 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav"style="align-content:center;">
+        <ul class="navbar-nav" style="align-content:center;">
             <li class="nav-item">
                 <a class="nav-link" href="#">Written Homework</a>
-        </li>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Dictation Homework</a>
             </li>
@@ -147,3 +147,64 @@
 <audio src="../soundfile/DialogueC1-4.mp3" controls>
 </audio> -->
 <!-- <button type="submit" class="btn btn-primary">Check The Script</button> -->
+
+
+<div class="form-group">
+    <label for="example" style="font-size: 50px; font-weight: bold;">WRITTEN HOMEWORK</label>
+    <hr>
+    <div>
+        <label for="exampleInputEmail1">Q1. 너는 아침에 샤워해?</label>
+        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+            placeholder="Write here">
+
+
+        <hr>
+        <label for="exampleInputEmail1">Q2. 너는 아침에 샤워 안 해?</label>
+        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+            placeholder="Write here">
+        <hr>
+        <label for="exampleInputEmail1">Q3. 난 밤에 샤워해.</label>
+        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+            placeholder="Write here">
+        <hr>
+
+
+
+
+
+
+
+        function showanswer() {
+            $.ajax({
+              type: "Get",
+              url: "/lesson/1",
+              data: {},
+              success: function (response) {
+                if (response['result'] == 'success') {
+                  let lesson = response['lesson'];
+                  for (let i = 0; i < lesson.length; i++) {
+                    make_card(lesson[i]['number'], lesson[i]['question'], lesson[i]['answer']);
+                  }
+                } else {
+                  alert('질문 불러오기 실패')
+                }
+              }
+            })
+          }
+          function make_card(number, question, answer) {
+            let tempHtml =
+              `<div class="problem">
+                <label for="exampleInputEmail1">Q${number}. ${question}</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                    placeholder="Write here">
+              </div>`
+            $('#question1').append(tempHtml)
+          }
+
+
+
+
+
+
+          <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#lesson1"
+        role="tab" aria-controls="settings">Lesson 1</a>
